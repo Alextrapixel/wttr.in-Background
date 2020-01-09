@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#images directory
+rep="$HOME/Pictures/backgrounds/rands"
+
+#create image list from dir
+liste=("${rep}/"*)
+
+#number of images
+nbre=${#liste[@]}
+
+#random select
+selection=$((${RANDOM} % ${nbre}))
+
+#create background with wttr.in
+convert ${liste[${selection}]} <( curl "wttr.in/city_tqp0_lang=en.png" ) -geometry +50+50 -composite "$HOME/Pictures/backgrounds/rand_bgr_wttr.jpg"
+
+#load background with wttr.in
+gsettings set org.mate.background picture-filename "$HOME/Pictures/backgrounds/rand_bgr_wttr.jpg"
